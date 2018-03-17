@@ -15,6 +15,7 @@ def read_reg(filename = 'reg.txt'):
    """
     with open(filename,'r') as reader:
         comment = False
+        reg_type = {}
         for line in reader:
             line = line[:line.find('#')]    # 删除注释
             line = parse_convert(line).strip()
@@ -24,10 +25,32 @@ def read_reg(filename = 'reg.txt'):
                 continue
             if line.startswith('#') or line.find("::=") <= 0:
                 continue
-            yield tuple(line.split(" ::= "))
+            l = list(line.split(" ::= "))
+            reg_type[l[0]] = l[1]
+    return reg_type
+            
     
-
-
+  
+def infix2postfix(s):
+    s1 = s
+    opstack = []
+    chrstack = []
+    p = s1.find('[')
+    if p == -1 : return s1
+    while p<len(s):
+        q = s1.find(']',p)
+        chrstack += s1[p:q+1]
+        if q == -1 or q+1 == len(s): break
+        
+        if s1[q+1] != '*' :
+            opstack +=['.']
+        if s1[q+1] == '*':
+            opstack +=['*']
+        p = q+1
+        
+    return ("".join(chrstack) + "".join(list(reversed(opstack))))
+    
 if __name__ == '__main__':
-   for n in read_reg():
-       print(n)
+    tmp = read_reg()
+    for (d,x) in tmp.items():
+print(d,infix2postfix(x))
