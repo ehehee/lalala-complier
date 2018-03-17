@@ -28,8 +28,6 @@ def read_reg(filename = 'reg.txt'):
             l = list(line.split(" ::= "))
             reg_type[l[0]] = l[1]
     return reg_type
-            
-    
   
 def infix2postfix(s):
     s1 = s
@@ -53,4 +51,4 @@ def infix2postfix(s):
 if __name__ == '__main__':
     tmp = read_reg()
     for (d,x) in tmp.items():
-print(d,infix2postfix(x))
+        print(d,infix2postfix(x))
