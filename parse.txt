@@ -1,0 +1,9 @@
+#P145
+#praser.analyse('ab#')
+#praser.analyse('aaaabaaab#')
+<S'> ::= <S>
+<S> ::= <a> <A> <d>
+<S> ::= <b> <A> <c>
+<S> ::= <a> <e> <c>
+<S> ::= <b> <e> <d>
+<A> ::= <e>
